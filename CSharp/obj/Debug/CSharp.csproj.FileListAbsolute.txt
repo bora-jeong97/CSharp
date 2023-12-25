@@ -1,0 +1,7 @@
+C:\Users\purpl\dev\CSharp\CSharp\CSharp\bin\Debug\CSharp.exe.config
+C:\Users\purpl\dev\CSharp\CSharp\CSharp\bin\Debug\CSharp.exe
+C:\Users\purpl\dev\CSharp\CSharp\CSharp\bin\Debug\CSharp.pdb
+C:\Users\purpl\dev\CSharp\CSharp\CSharp\obj\Debug\CSharp.csproj.AssemblyReference.cache
+C:\Users\purpl\dev\CSharp\CSharp\CSharp\obj\Debug\CSharp.csproj.CoreCompileInputs.cache
+C:\Users\purpl\dev\CSharp\CSharp\CSharp\obj\Debug\CSharp.exe
+C:\Users\purpl\dev\CSharp\CSharp\CSharp\obj\Debug\CSharp.pdb
