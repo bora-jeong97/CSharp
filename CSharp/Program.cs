@@ -24,6 +24,19 @@ namespace CSharp
             public int attack;
         }
 
+        enum MonsterType
+        {
+            None = 0,
+            Slime = 1,
+            Orc = 2,
+            Skeleton = 3
+        }
+
+        struct Monster
+        {
+            public int hp;
+            public int attack;
+        }
 
         static ClassType ChooseClass()
         {
@@ -76,22 +89,93 @@ namespace CSharp
             }
         }
 
-        static void Main(string[] args)
+        static void CreateRandomMonster(out Monster monster)
         {
-            // TextRPG 직업 고르기
+            // 랜덤으로 1-3 몬스터 중 하나를 리스폰
+            Random rand = new Random();
+            int randMonster = rand.Next(1, 4); // 1~3
+
+
+            switch (randMonster)
+            {
+                case (int)MonsterType.Slime:
+                    Console.WriteLine("슬라임 스폰");
+                    monster.hp = 20;
+                    monster.attack = 2;
+                    break;
+                case (int)MonsterType.Orc:
+                    Console.WriteLine("오크 스폰");
+                    monster.hp = 40;
+                    monster.attack = 4;
+                    break;
+                case (int)MonsterType.Skeleton:
+                    Console.WriteLine("스켈레톤 스폰");
+                    monster.hp = 30;
+                    monster.attack = 3;
+                    break;
+                default:
+                    monster.hp = 0;
+                    monster.attack = 0;
+                    break;
+            }
+
+        }
+
+        static void EnterField()
+        {
+            Console.WriteLine("필드에 접속했습니다!");
+
+            // 랜덤으로 1~3 몬스터 중 하나를 리스폰
+            Monster monster;
+            CreateRandomMonster(out monster);
+
+            Console.WriteLine("[1] 전투 모드로 돌입");
+            Console.WriteLine("[2] 일정 확률로 마을로 도망");
+
+        }
+
+        static void EnterGame()
+        {
             while (true)
             {
+                Console.WriteLine("마을에 접속했습니다!");
+                Console.WriteLine("[1] 필드로 간다");
+                Console.WriteLine("[2] 로비로 돌아가기");
+
+                string input = Console.ReadLine();
+                if(input == "1")
+                {
+                    // 필드 접속
+                    EnterField();
+                }  else if(input == "2")
+                {
+                    break;
+                }
+
+            }
+
+
+        }
+
+
+        static void Main(string[] args)
+        {
+            
+            while (true)
+            {
+                // TextRPG 1.직업 고르기
                 ClassType choice = ChooseClass();
                 if (choice != ClassType.None)
                 {
-                    // 캐릭터 생성
+                    // 2.캐릭터 생성
 
                     Player player;
-
                     CreatePlayer(choice, out player);
 
                     Console.WriteLine($"hp : {player.hp} attack : {player.attack}");
-                    // 필드로 가서 몬스터랑 싸운다
+
+                    // 3.게임 접속 필드로 가서 몬스터를 잡는다.
+                    EnterGame();
                 }
             }
 
