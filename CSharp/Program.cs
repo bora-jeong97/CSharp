@@ -7,31 +7,52 @@ using System.Threading.Tasks;
 namespace CSharp
 {
     // 객체(OOP Object Oriented Programming) 지향 (은닉성/상속성/다형성)
-
-
-    class Knight
+    class Player
     {
-        // 접근 한정자
-        // public protected private
-        protected int hp;   // 상속된 calss에서 사용가능
-
+        protected int hp;
+        protected int attack;
     }
 
-    class SuperKnight : Knight
+    class Knight : Player
     {
-        void Test()
+    
+    }
+
+    class Mage : Player
+    {
+        public int mp;
+    }
+
+
+    class Program 
+    {
+        static void EnterGame(Player player)
         {
-            hp = 100;
+            // 방법1
+            Mage mage = (player as Mage);   // Knight라면 null이 들어간다.
+            if(mage != null)
+            {
+                mage.mp = 10;
+                Console.WriteLine("실행");
+            }
+   
+            // 방법2
+            /*            bool isMage = (player is Mage);
+                        if (isMage)
+                        {
+
+                            Mage mage = (Mage)player;
+                            mage.mp = 10;
+                        }*/
         }
-    }
-
-
-    class Program : Knight
-    {
 
         static void Main(string[] args)
         {
             Knight knight = new Knight();
+            Mage mage = new Mage();
+
+            EnterGame(knight);
+            EnterGame(mage);
         }
     }
 }
