@@ -15,27 +15,16 @@ namespace CSharp
     }
 
 
-    class Player
+    class Player : Creature
     {
         protected PlayerType type = PlayerType.None;
-        protected int hp = 0;
-        protected int attack = 0;
 
-
-        protected Player(PlayerType type)  // 매개변수 필수. 기본 생성자는 안만들었기 때문에 무조건 type을 넣어야 사용가능하다.
+        protected Player(PlayerType type) : base(CreatureType.Player) // 매개변수 필수. 기본 생성자는 안만들었기 때문에 무조건 type을 넣어야 사용가능하다.
         {
             this.type = type;
         }
 
-        public void SetInfo(int hp, int attack)
-        {
-            this.hp = hp;
-            this.attack = attack;
-        }
-
-        public int GetHp() { return hp; }
-        public int GetAttack() { return attack; }
-
+        public PlayerType GetPlayerType() { return type; }
     }
 
     class Knight : Player
