@@ -8,82 +8,47 @@ namespace CSharp
 {
 
     // 자료구조
+    // 이차원 배열
     class Program
     {
-        
-        static int GetHighestScore(int[] scores)
+        class Map
         {
-            int max = 0;
-            for (int i = 0; i < scores.Length; i++)
+            int[,] tiles =
             {
-                if (max < scores[i])
-                    max = scores[i];
-            }
-            return max;
-        }
+                { 1, 1, 1, 1, 1},
+                { 1, 0, 0, 0, 1},
+                { 1, 0, 0, 0, 1},
+                { 1, 0, 0, 0, 1},
+                { 1, 1, 1, 1, 1},
 
-        static int GetAverageScore(int[] scores)
-        {
-            if (scores.Length == 0)
-                return 0;
+            };
 
-            int sum = 0;
-            for (int i = 0; i < scores.Length; i++)
+            public void Render()
             {
-                sum += scores[i];
-            }
+                var defaultColor = Console.ForegroundColor;
 
-
-            int re = sum / scores.Length;
-            return re;
-        }
-
-        static int GetIndexOf(int[] scores, int value)
-        {
-            int re = -1;
-            for (int i = 0; i < scores.Length; i++)
-            {
-                if (value == scores[i])
-                    re = i; 
-
-            }
-
-            return re;
-        }
-
-        static void Sort(int[] scores)
-        {
-            int tmp;
-            for (int i = 0; i < scores.Length; i++)
-            {
-                for (int j = 0; j < scores.Length-1; j++)
+                for (int i = 0; i < tiles.GetLength(1); i++)
                 {
-                    if(scores[j] > scores[j + 1])
+                    for (int j = 0; j < tiles.GetLength(0); j++)
                     {
-                        tmp = scores[j];
-                        scores[j] = scores[j + 1];
-                        scores[j + 1] = tmp;
-                    }
-                }
-            }
+                        if (tiles[i, j] == 1)
+                            Console.ForegroundColor = ConsoleColor.Red; // 색 변경
+                        else
+                            Console.ForegroundColor = ConsoleColor.Green; // 색 변경
 
-            foreach (int score in scores)
-            {
-                Console.WriteLine(score);
+                        Console.Write('\u25cf');    // 타원형 
+                    }
+                    Console.WriteLine();
+                }
+
+                Console.ForegroundColor = defaultColor; // 마지막 색을 디폴트로 다시 바꿔주기 위함
             }
-            
         }
 
         static void Main(string[] args)
         {
-            // 배열
-            int[] scores = new int[5] { 10, 30, 40, 20, 50 };
-            
-            Console.WriteLine(GetHighestScore(scores));
-            Console.WriteLine(GetAverageScore(scores));
-            Console.WriteLine(GetIndexOf(scores, 20));
-            Sort(scores);
-
+            Map map = new Map();
+            map.Render();
         }
     }
 }
