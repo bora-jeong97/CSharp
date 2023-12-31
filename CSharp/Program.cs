@@ -4,45 +4,24 @@ using System.Collections.Generic;
 namespace CSharp
 {
 
-    class Monster
-    {
-        public int id;
 
-        public Monster(int id)
-        {
-            this.id = id;
-        }
-    }
-
-
-    // 자료구조
-    // 사전 Dictionary
     class Program
     {
 
         static void Main(string[] args) {
 
+            // 어떤 형식이든 호환되게 하는 형식
+            // 1. object : 참조타입, 형식이 object이다.
+            // 2. var   : 담겨있는 값을 보고 형식을 그 형식으로 바꿔준다. (var = 3) == (int = 3)
 
-            Dictionary<int, Monster> dic = new Dictionary<int, Monster>();
+            var obj3 = 3;
+            var obj4 = "hello";
 
-            for (int i = 0; i < 10000; i++)
-            {
-                dic.Add(i, new Monster(i));
-            }
+            object obj = 3;
+            object obj2 = "hello";
 
-            // 찾기
-            // 방법 2
-            Monster mon;
-            bool found = dic.TryGetValue(5000, out mon);
-
-            // 방법 1
-            //Monster mon = dic[5000];    // 직접 명시적으로 가져오는 경우 값이 없으면 에러가 나기 때문에 위 방법을 선호
-
-            // 삭제
-            dic.Remove(7777);
-
-            // 전체삭제
-            dic.Clear();
+            int num = (int)obj;
+            string str = (string)obj;
 
 
         }
