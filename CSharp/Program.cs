@@ -4,41 +4,46 @@ using System.Collections.Generic;
 namespace CSharp
 {
 
+    class Monster
+    {
+        public int id;
+
+        public Monster(int id)
+        {
+            this.id = id;
+        }
+    }
+
+
     // 자료구조
-    // 리스트(List) <- 동적 배열 
+    // 사전 Dictionary
     class Program
     {
 
-        // 배열과는 달리 만들때 크기가 고정되지 않는다.
-        static void Main(string[] args)
-        {
-            // List <- 동적배열
-            // class 형이기 때문에 참조형이다.
-            List<int> list = new List<int>();
+        static void Main(string[] args) {
 
-            // 뒤에 추가
-            for (int i = 0; i < 5; i++)
+
+            Dictionary<int, Monster> dic = new Dictionary<int, Monster>();
+
+            for (int i = 0; i < 10000; i++)
             {
-                list.Add(i);    // 뒤에 추가
+                dic.Add(i, new Monster(i));
             }
-    
-            // 삽입
-            list.Insert(2, 999); // 지정 인덱스에 요소를 삽입
-            
+
+            // 찾기
+            // 방법 2
+            Monster mon;
+            bool found = dic.TryGetValue(5000, out mon);
+
+            // 방법 1
+            //Monster mon = dic[5000];    // 직접 명시적으로 가져오는 경우 값이 없으면 에러가 나기 때문에 위 방법을 선호
+
             // 삭제
-            list.RemoveAt(0); // 인덱스로 삭제
+            dic.Remove(7777);
 
+            // 전체삭제
+            dic.Clear();
 
-            list.Remove(3); // 값으로 삭제
-
-            // 전체 삭제
-            list.Clear();
-
-            // 출력
-            for (int i = 0; i < list.Count; i++)
-            {
-                Console.WriteLine(i);
-            }
 
         }
     }
