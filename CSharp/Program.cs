@@ -7,23 +7,50 @@ namespace CSharp
 
     class Program
     {
+        // 클래스의 일반화
+        // 일반화 형식 : 어떤 형식을 넣어도 사용 가능
+        class MyList<T> // 제네릭/일반화 클래스
+        {
+
+            T[] arr = new T[10];
+
+            public T GetItem(int i)
+            {
+                return arr[i];
+            }
+        }
+
+        class Monster{}
+
+        // 함수의 일반화
+        static void Test<T>(T input)
+        {
+
+        }
+
+        // 함수 인자가 여러개 일 떄
+        static void Test2<T, K>(T input, K input2)
+        {
+
+        }
+
+        // 조건을 주는 경우
+        static void Test3<T, K>(T input) where T : struct // where T : struct(값형식), class(참조형식), new(어떠한 인자도 받지않는 기본생성자), Monster(몬스터 혹은 몬스터를 상속받는 것)
+        {
+
+        }
 
         static void Main(string[] args) {
 
-            // 어떤 형식이든 호환되게 하는 형식
-            // 1. object : 참조타입, 형식이 object이다.
-            // 2. var   : 담겨있는 값을 보고 형식을 그 형식으로 바꿔준다. (var = 3) == (int = 3)
+            MyList<int> myIntList = new MyList<int>();
+            int item = myIntList.GetItem(0);
+            MyList<short> mySortList = new MyList<short>();
+            MyList<Monster> myMonsterLList = new MyList<Monster>();
 
-            var obj3 = 3;
-            var obj4 = "hello";
+            Test<int>(3);
+            Test<float>(3.0f);
 
-            object obj = 3;
-            object obj2 = "hello";
-
-            int num = (int)obj;
-            string str = (string)obj;
-
-
+            Test2<int, string>(1, "아무거나 넣어도 된다.");
         }
     }
 }
