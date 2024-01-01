@@ -4,49 +4,40 @@ using System.Collections.Generic;
 namespace CSharp
 {
 
-    // 추상 클래스
+   
     class Program
     {
-
-        abstract class Monster  // abstract 추상클래스 : 개념적으로만 존재 인스턴스를 만들 수 없음. 상속받는 자식클래스는 무조건 부모클래스의 함수를 구현해야함.
+        class Knight
         {
-            public abstract void Shout();
-        }
 
-        interface IFlyable
-        {
-            void Fly();
+            // 프로퍼티
+            // 방법 1
+            /*            private int hp;
+                        public int Hp
+                        {
+                            get { return hp; }
+                            private set { hp = value; }
+                        }*/
 
-        }
-
-        class Orc : Monster
-        {
-            public override void Shout()
+            // 방법 2 사용성과 은닉성을 챙길 수 있는 1석 2조의 방법
+            public int Hp
             {
-                Console.WriteLine("록타르 오가르!");
-            }
+                get; set;
+            } = 100; // 요런식으로 초기화 값도 넣을 수 있다. 안넣어도 됨
+
+            // 해당 아래 코드가 위 코드에 내포된 값임.
+            private int _hp;
+            public int GetHP() { return _hp; }
+            public void SetHp(int value) { _hp = value; }
+
         }
-
-        class FlyableOrc : Orc, IFlyable
-        {
-            public void Fly()
-            {
-            }
-        }
-
-        static void DoFly(IFlyable flayable)
-        {
-            flayable.Fly(); 
-        }
-
-
-
 
         static void Main(string[] args) {
+            Knight knight = new Knight();
+            
+            int hp = knight.Hp; // set
+            knight.Hp = 100;    // get
 
-            IFlyable orc = new FlyableOrc();
-            DoFly(orc); // IFlyable을 내포한 클래스만 매개변수로 사용가능
-                       
         }
     }
 }
