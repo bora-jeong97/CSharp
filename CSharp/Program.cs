@@ -4,40 +4,45 @@ using System.Collections.Generic;
 namespace CSharp
 {
 
-   
+    // delegate (대리자)
     class Program
     {
-        class Knight
+
+        // 업체 사장 ~ 사장님의 비서
+        // 우리의 연락처/용건 ->
+        // 거꾸로 연락을 달라고 함.
+
+
+        delegate int OnClicked(); // 이것은 함수가 아닌 형식
+        // delegate -> 형식은 형식인데, 함수 자체를 인자로 넘겨주는 그런 형식
+        // 반환 int 입력 void
+        // OnClicked가 delegate 형식의 이름이다.
+
+        // UI
+        static void ButtonPressed(OnClicked clickedFunction) // 함수 자체를 인자로 넘겨주고 함수를 호출
         {
+            clickedFunction();
+        }
 
-            // 프로퍼티
-            // 방법 1
-            /*            private int hp;
-                        public int Hp
-                        {
-                            get { return hp; }
-                            private set { hp = value; }
-                        }*/
 
-            // 방법 2 사용성과 은닉성을 챙길 수 있는 1석 2조의 방법
-            public int Hp
-            {
-                get; set;
-            } = 100; // 요런식으로 초기화 값도 넣을 수 있다. 안넣어도 됨
+        static int TestDelegate()
+        {
+            Console.WriteLine("Hello Delegate");
+            return 0;
+        }
 
-            // 해당 아래 코드가 위 코드에 내포된 값임.
-            private int _hp;
-            public int GetHP() { return _hp; }
-            public void SetHp(int value) { _hp = value; }
-
+        static int TestDelegate2()
+        {
+            Console.WriteLine("Hello Delegate2");
+            return 0;
         }
 
         static void Main(string[] args) {
-            Knight knight = new Knight();
-            
-            int hp = knight.Hp; // set
-            knight.Hp = 100;    // get
 
+            OnClicked clicked = new OnClicked(TestDelegate);
+            clicked += TestDelegate2;
+
+            ButtonPressed(clicked);
         }
     }
 }
