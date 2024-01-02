@@ -6,52 +6,40 @@ namespace CSharp
 {
 
 
-    // 리플렉션 Reflection : X-Ray 
+    // Nullable (널러블) : Null이 가능한
     class Program
     {
-        class Important : System.Attribute // 컴퓨터가 런타임중에 체크할 수 있는 주석이다.
-        {
-            string message;
-            private string v;
 
-            public Important(string message) { this.message = message; }
-        }
-        class Monster
-        {
-            // hp입니다. 중요한 정보입니다.
-            [Important("this is HP, Very Important")]
-            public int hp;
-            protected int attack;
-            private float speed;
 
-            void Attack() { }
+        static int Find()
+        {
+
+            return 0;    
         }
 
         static void Main(string[] args)
         {
+            int? number = null; //?를 추가하면 이제 null도 사용가능
             
-            Monster monster = new Monster();
-            Type type = monster.GetType();
-
-            var fields = type.GetFields(System.Reflection.BindingFlags.Public
-                | System.Reflection.BindingFlags.NonPublic
-                | System.Reflection.BindingFlags.Static
-                | System.Reflection.BindingFlags.Instance
-                );
-
-            
-            foreach (FieldInfo field in fields)
+            // 출력 방법 2
+            int b = number ?? 0; // null이라면 0을 초기값으로 넣어준다.
+            Console.WriteLine(b);
+/*
+            // 출력 방법 1
+            // null체크1
+            if(number != null)
             {
-                string access = "protected";
-                if (field.IsPublic)
-                    access = "public";
-                else if (field.IsPrivate)
-                    access = "private";
+                int a = number.Value;
+                Console.WriteLine(a);
 
-                var attributes = field.GetCustomAttributes();
-
-                Console.WriteLine($"{access} {field.FieldType.Name} {field.Name}");
             }
+            // null체크2
+            if (number.HasValue)
+            {
+                int a = number.Value;
+                Console.WriteLine(a);
+            }*/
+
 
         }
     }
