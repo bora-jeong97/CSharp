@@ -4,26 +4,63 @@ using System.Collections.Generic;
 namespace CSharp
 {
 
-    // 이벤트 ( delegate를 래핑하는 문법 접근제한을 걸기위해)
+
+    enum ItemType
+    {
+        Weapon, 
+        Armor,
+        Amulet,
+        Ring
+    }
+
+    enum Rarity
+    {
+        Normal,
+        Uncommon,
+        Rare,
+    }
+
+    class Item
+    {
+        public ItemType ItemType;
+        public Rarity Rarity;
+    
+    }
+
+
+    // Lambda : 일회용 함수를 만드는데 사용하는 문법이다.
     class Program
     {
 
+        static List<Item> _items = new List<Item>();
 
-        static void OnInputTest()
+        delegate bool ItemSelector(Item item);
+
+        static bool IsWeapon(Item item)
         {
-            Console.WriteLine("Input Received");
+            return item.ItemType == ItemType.Weapon;
         }
 
-        static void Main(string[] args) {
-
-            InputManager inputManager = new InputManager();
-
-            inputManager.InputKey += OnInputTest;
-
-            while (true)
+        static Item FindWeapon(ItemSelector selector)
+        {
+            foreach(Item item in _items)
             {
-                inputManager.Update();
+                if (selector(item)) // true인경우 item을 리턴
+                    return item;
             }
+            return null;
+        }
+
+
+
+        static void Main(string[] args)
+        {
+
+            _items.Add(new Item() { ItemType = ItemType.Weapon, Rarity = Rarity.Normal });
+            _items.Add(new Item() { ItemType = ItemType.Armor, Rarity = Rarity.Uncommon });
+            _items.Add(new Item() { ItemType = ItemType.Ring, Rarity = Rarity.Rare });
+
+            Item item = FindWeapon(IsWeapon);
         }
     }
 }
