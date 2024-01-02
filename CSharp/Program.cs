@@ -7,6 +7,8 @@ namespace CSharp
 
 
     // Nullable (널러블) : Null이 가능한
+    // 형식에 ? 를 붙인다.
+    // ?? 를 사용해 초기값을 넣어줄 수 있다.
     class Program
     {
 
@@ -17,28 +19,16 @@ namespace CSharp
             return 0;    
         }
 
+        class Monster
+        {
+            public int id { get; set; }
+        }
+
         static void Main(string[] args)
         {
-            int? number = null; //?를 추가하면 이제 null도 사용가능
-            
-            // 출력 방법 2
-            int b = number ?? 0; // null이라면 0을 초기값으로 넣어준다.
-            Console.WriteLine(b);
-/*
-            // 출력 방법 1
-            // null체크1
-            if(number != null)
-            {
-                int a = number.Value;
-                Console.WriteLine(a);
+            Monster monster = null;
 
-            }
-            // null체크2
-            if (number.HasValue)
-            {
-                int a = number.Value;
-                Console.WriteLine(a);
-            }*/
+            int? id = monster?.id;  // monster값이 null이면 null null이 아니면 id값을 반환한다.
 
 
         }
